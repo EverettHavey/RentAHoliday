@@ -37,10 +37,10 @@
                     <input type="text" id="theme" name="theme" placeholder="e.g., 'Global Reading Day' or 'Silent World Tuesday'" required>
 
                     <label for="startDate">Holiday Start Date:</label>
-                    <input type="date" id="startDate" name="startDate" required>
-
+                    <input type="date" id="startDate" name="startDate" required onchange="updateTotalAmount()">
+                    
                     <label for="endDate">Holiday End Date:</label>
-                    <input type="date" id="endDate" name="endDate" required>
+                    <input type="date" id="endDate" name="endDate" required onchange="updateTotalAmount()">
 
                     <label for="scope">Holiday Scope:</label>
                     <select id="scope" name="scope" required>
@@ -49,6 +49,15 @@
                         <option value="Group">Private (Small Group/Family)</option>
                         <option value="World Wide">World Wide (Public)</option>
                     </select>
+
+                    <label for="recurrence">Recurrence Options:</label>
+                    <select id="recurrence" name="recurrence" required>
+                        <option value="One Time">One Time Event (No Repeat)</option>
+                        <option value="Monthly">Monthly</option>
+                        <option value="Quarterly">Quarterly</option>
+                        <option value="Annually">Annually / Yearly</option>
+                        <option value="Custom">Custom Schedule (Requires follow-up)</option>
+                    </select>
                 </fieldset>
 
                 <fieldset>
@@ -56,28 +65,63 @@
                     
                     <p>Should the participants of this holiday receive mandatory compensation?</p>
                     <div class="radio-group">
-                        <input type="radio" id="paidYes" name="paidCompensation" value="Yes" onclick="toggleCompensationAmount(true)">
+                        <input type="radio" id="paidYes" name="paidCompensation" value="Yes" onclick="toggleCompensationAmount(true); updateTotalAmount();">
                         <label for="paidYes">Yes, include compensation.</label>
-                        <input type="radio" id="paidNo" name="paidCompensation" value="No" checked onclick="toggleCompensationAmount(false)">
+                        <input type="radio" id="paidNo" name="paidCompensation" value="No" checked onclick="toggleCompensationAmount(false); updateTotalAmount();">
                         <label for="paidNo">No, compensation is voluntary/unnecessary.</label>
                     </div>
 
                     <div id="compensation-details" class="hidden-field">
                         <label for="compensationAmount">Compensation Amount (Per Participant/Day):</label>
-                        <input type="number" id="compensationAmount" name="compensationAmount" min="1" placeholder="$50.00" value="0">
-                        <p class="help-text">This value will be used to calculate the preliminary compensation fund, significantly impacting the final quote.</p>
+                        <!-- UPDATED: Changed from input type="number" to a selectable dropdown -->
+                        <select id="compensationAmount" name="compensationAmount" required onchange="updateTotalAmount()">
+                            <option value="0">-- Select Desired Amount --</option>
+                            <option value="25">$25.00 - Standard Stipend</option>
+                            <option value="50">$50.00 - Enhanced Stipend</option>
+                            <option value="75">$75.00 - Premium Compensation</option>
+                            <option value="100">$100.00 - Full Day Compensation</option>
+                        </select>
+                        <p class="help-text">This value will be used to calculate the preliminary compensation fund, significantly impacting the final quote. (Estimate based on 100 participants).</p>
                     </div>
                 </fieldset>
 
                 <fieldset>
                     <legend>Final Details & Payment</legend>
+
+                    <!-- MODIFIED: Pricing Tier is now a selectable dropdown -->
                     <label for="budget">Selected Price Tier (Starting Investment):</label>
-                    <input type="text" id="budget" name="budget" readonly value="$0">
+                    <select id="budget" name="budget" required onchange="updateTotalAmount()">
+                        <option value="">-- Select Base Tier --</option>
+                        <option value="10000">$10,000 | The Local Explorer</option>
+                        <option value="25000">$25,000 | The Regional Disruptor</option>
+                        <option value="50000">$50,000 | The Global Chronomancer</option>
+                    </select>
+
+                    <!-- NEW: Payment Option Selection -->
+                    <label for="paymentOption">Preferred Initial Payment Method:</label>
+                    <select id="paymentOption" name="paymentOption" required>
+                        <option value="">-- Select Option --</option>
+                        <option value="Credit Card">Credit Card (Visa, Mastercard, Amex)</option>
+                        <option value="Bank Transfer">Bank Transfer (ACH/Wire)</option>
+                        <option value="PayPal">PayPal / Digital Wallet</option>
+                        <option value="Escrow Service">Third-Party Escrow Service</option>
+                    </select>
                     
                     <label for="fullName">Client Full Name:</label>
                     <input type="text" id="fullName" name="fullName" required>
 
-                    <p><em>*Note: Payment section is placeholder. Real payment integration occurs after quote approval.</em></p>
+                    <!-- NEW: Total Amount Display -->
+                    <p class="summary-line">
+                        <strong>Base Investment:</strong> <span id="base-investment">$0.00</span>
+                    </p>
+                    <p class="summary-line">
+                        <strong>Compensation Fund Estimate:</strong> <span id="compensation-estimate">$0.00</span>
+                    </p>
+                    <div id="total-amount-display" class="total-summary">
+                        <strong>TOTAL ESTIMATED INITIAL COST:</strong> <span id="final-total">$0.00</span>
+                    </div>
+
+                    <p><em>*Note: The initial payment is a deposit. Real payment integration occurs after quote approval.</em></p>
                     <button type="submit" class="cta-button">Submit Request & Review Quote</button>
                 </fieldset>
             </form>

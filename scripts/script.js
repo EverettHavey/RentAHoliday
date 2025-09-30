@@ -140,6 +140,8 @@ const upcomingHolidays = [
 
 // --- Utility Functions ---
 
+// ... (existing getNextHoliday and formatDate functions remain the same) ...
+
 /**
  * Finds the next upcoming holiday from the list based on the current date.
  * @returns {object|null} The next holiday object or null if none are future-dated.
@@ -170,6 +172,70 @@ function formatDate(dateString) {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return date.toLocaleDateString(undefined, options);
 }
+
+
+// --- New Calculation Logic ---
+
+/**
+ * Calculates the total cost estimate based on selected tier, duration, and compensation.
+ * Note: Compensation is estimated based on 100 participants for a 'World Wide' scope.
+ */
+window.updateTotalAmount = function() {
+    const budgetSelect = document.getElementById('budget');
+    const startDateInput = document.getElementById('startDate');
+    const endDateInput = document.getElementById('endDate');
+    const paidCompensation = document.querySelector('input[name="paidCompensation"]:checked')?.value;
+    const compensationAmountInput = document.getElementById('compensationAmount');
+
+    // Display elements
+    const baseInvestmentDisplay = document.getElementById('base-investment');
+    const compensationEstimateDisplay = document.getElementById('compensation-estimate');
+    const finalTotalDisplay = document.getElementById('final-total');
+
+    // 1. Get Base Investment
+    let baseInvestment = Number(budgetSelect.value) || 0;
+
+    // 2. Calculate Duration (in days)
+    let durationDays = 1; // Default to 1 day for calculation if dates are invalid
+    if (startDateInput.value && endDateInput.value) {
+        const startDate = new Date(startDateInput.value);
+        const endDate = new Date(endDateInput.value);
+
+        if (startDate <= endDate) {
+            // Calculate difference in milliseconds, then convert to days (inclusive of start and end day)
+            const diffTime = Math.abs(endDate.getTime() - startDate.getTime());
+            durationDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+        }
+    }
+
+    // 3. Calculate Compensation Estimate
+    let compensationEstimate = 0;
+    const participantEstimate = 100; // Placeholder estimate for 'World Wide' public holiday compensation
+
+    if (paidCompensation === 'Yes' && compensationAmountInput.value) {
+        const compPerPersonPerDay = Number(compensationAmountInput.value);
+        if (compPerPersonPerDay > 0) {
+            // Estimate = Compensation per person/day * Estimated Participants * Duration Days
+            compensationEstimate = compPerPersonPerDay * participantEstimate * durationDays;
+        }
+    }
+
+    // 4. Calculate Total
+    const finalTotal = baseInvestment + compensationEstimate;
+
+    // 5. Update Display
+    const formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+    });
+
+    baseInvestmentDisplay.textContent = formatter.format(baseInvestment);
+    compensationEstimateDisplay.textContent = formatter.format(compensationEstimate);
+    finalTotalDisplay.textContent = formatter.format(finalTotal);
+};
+
 
 // --- Page Specific Logic ---
 
@@ -234,6 +300,8 @@ window.toggleCompensationAmount = function(show) {
         document.getElementById('compensationAmount').removeAttribute('min');
         document.getElementById('compensationAmount').value = 0; // Reset value
     }
+    // Call calculation after toggling visibility
+    updateTotalAmount();
 };
 
 
@@ -242,24 +310,19 @@ window.toggleCompensationAmount = function(show) {
  */
 function handleRentalPage() {
     const rentalForm = document.getElementById('rentalForm');
-    const budgetInput = document.getElementById('budget');
-    const scopeSelect = document.getElementById('scope');
     const paidNoRadio = document.getElementById('paidNo');
     const submissionMessage = document.getElementById('submission-message');
-
-    // 1. Pre-fill budget based on URL parameter (from Pricing.html links)
-    const urlParams = new URLSearchParams(window.location.search);
-    const tier = urlParams.get('tier');
-    if (tier) {
-        budgetInput.value = `$${Number(tier).toLocaleString('en-US')}`;
-    }
 
     // Ensure compensation details are hidden and 'No' is selected initially
     toggleCompensationAmount(false);
     paidNoRadio.checked = true;
 
+    // Set initial total amount display
+    updateTotalAmount(); 
+
     // Optional: Auto-select Public scope if paid compensation is relevant
     const compensationDetails = document.getElementById('compensation-details');
+    const scopeSelect = document.getElementById('scope');
     compensationDetails.addEventListener('change', (event) => {
         const target = event.target;
         // If 'Yes' is selected for compensation, suggest 'World Wide' scope if not already selected
@@ -281,12 +344,10 @@ function handleRentalPage() {
             const scope = scopeSelect.value;
             const paidCompensation = document.querySelector('input[name="paidCompensation"]:checked').value;
             const compensationAmount = Number(document.getElementById('compensationAmount').value);
-
-            // --- NEW FIELDS ---
-            // NOTE: The IDs 'recurrence' and 'paymentOption' must be present in your Rent.html form!
             const recurrence = document.getElementById('recurrence')?.value || 'Not Specified';
             const paymentOption = document.getElementById('paymentOption')?.value || 'Not Specified';
-            
+            const finalTotalText = document.getElementById('final-total').textContent; // Get the displayed total
+
             if (startDate > endDate) {
                 submissionMessage.textContent = 'Error: The Holiday Start Date cannot be after the End Date.';
                 submissionMessage.className = 'message-box error-box';
@@ -296,7 +357,7 @@ function handleRentalPage() {
 
             if (paidCompensation === 'Yes' && compensationAmount <= 0) {
                  submissionMessage.textContent = 'Error: Compensation amount must be greater than $0 if selected.';
-                 submissionMessage.className = 'message-box error-error-box';
+                 submissionMessage.className = 'message-box error-box';
                  submissionMessage.style.display = 'block';
                  return;
             }
@@ -305,7 +366,8 @@ function handleRentalPage() {
             submissionMessage.innerHTML = `
                 <h3>Request Submitted!</h3>
                 <p>We are analyzing your custom holiday concept (${document.getElementById('theme').value}) for feasibility.</p>
-                <div style="margin-top: 10px; padding: 10px; border: 1px dashed #ccc; border-radius: 4px;">
+                <div style="margin-top: 10px; padding: 10px; border: 1px dashed #ccc; border-radius: 4px; background-color: #f9f9f9;">
+                    <strong>Estimated Total: ${finalTotalText}</strong><br>
                     <strong>Recurrence:</strong> ${recurrence} <br>
                     <strong>Payment Method:</strong> ${paymentOption}
                 </div>
@@ -315,7 +377,7 @@ function handleRentalPage() {
             submissionMessage.style.display = 'block';
 
             rentalForm.reset();
-            budgetInput.value = '$0';
+            updateTotalAmount(); // Reset display totals
             toggleCompensationAmount(false); // Hide compensation field again
             paidNoRadio.checked = true;
         });

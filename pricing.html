@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChronoLeisure - Plan & Rent Holiday</title>
+    <title>ChronoLeisure - Pricing & Planning Steps</title>
     <!-- Updated CSS paths -->
     <link rel="stylesheet" href="styles/larger.css" media="(min-width: 600px)">
     <link rel="stylesheet" href="styles/mobil.css" media="(max-width: 599px)">
 </head>
 <body>
     <header>
-        <h1>Plan Your Custom Holiday</h1>
+        <h1>Investment in Temporal Design</h1>
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
@@ -22,66 +22,67 @@
         </nav>
     </header>
     <main>
-        <section id="holiday-form-section">
-            <h2>Detailed Holiday Design Request</h2>
-            <form id="rentalForm" class="professional-form">
-                
-                <fieldset>
-                    <legend>Design & Scope</legend>
+        <section id="pricing-tiers">
+            <h2>Our Core Service Tiers</h2>
+            <div class="pricing-container">
+                <div class="price-tier">
+                    <h3>$10,000 | The Local Explorer</h3>
+                    <p class="price-tag">$10k</p>
+                    <ul>
+                        <li>Private (You Only) or Small Group Scope</li>
+                        <li>Duration up to 24 hours</li>
+                        <li>Basic Theme Planning and Execution</li>
+                        <li>Ideal for personal milestones or small corporate retreats.</li>
+                    </ul>
+                    <a href="Rent.html?tier=10000" class="cta-button">Start with $10k Tier</a>
+                </div>
 
-                    <label for="holidayImage">Holiday Visual Concept (Upload Image/Logo)</label>
-                    <input type="file" id="holidayImage" name="holidayImage" accept="image/*">
-                    <p class="help-text">Please upload a file that visually represents your holiday concept.</p>
+                <div class="price-tier featured">
+                    <h3>$25,000 | The Regional Disruptor</h3>
+                    <p class="price-tag">$25k</p>
+                    <ul>
+                        <li>Private or Regional Public Scope (e.g., a single country or state)</li>
+                        <li>Duration up to 72 hours</li>
+                        <li>Advanced Logistics and Integration Support</li>
+                        <li>Covers compensation administration fees for public options.</li>
+                    </ul>
+                    <a href="Rent.html?tier=25000" class="cta-button">Start with $25k Tier</a>
+                </div>
 
-                    <label for="theme">Holiday Name / Concept Summary:</label>
-                    <input type="text" id="theme" name="theme" placeholder="e.g., 'Global Reading Day' or 'Silent World Tuesday'" required>
+                <div class="price-tier">
+                    <h3>$50,000 | The Global Chronomancer</h3>
+                    <p class="price-tag">$50k</p>
+                    <ul>
+                        <li>Exclusive "You Only" or Full World Wide Public Scope</li>
+                        <li>Custom Duration and Full Temporal Integration</li>
+                        <li>Dedicated Logistical and PR Team</li>
+                        <li>Priority scheduling and compensation fund management.</li>
+                    </ul>
+                    <a href="Rent.html?tier=50000" class="cta-button">Start with $50k Tier</a>
+                </div>
+            </div>
+        </section>
 
-                    <label for="startDate">Holiday Start Date:</label>
-                    <input type="date" id="startDate" name="startDate" required>
-
-                    <label for="endDate">Holiday End Date:</label>
-                    <input type="date" id="endDate" name="endDate" required>
-
-                    <label for="scope">Holiday Scope:</label>
-                    <select id="scope" name="scope" required>
-                        <option value="">-- Select Scope --</option>
-                        <option value="You Only">Private (You Only)</option>
-                        <option value="Group">Private (Small Group/Family)</option>
-                        <option value="World Wide">World Wide (Public)</option>
-                    </select>
-                </fieldset>
-
-                <fieldset>
-                    <legend>Compensation Logistics (Public Holidays Only)</legend>
-                    
-                    <p>Should the participants of this holiday receive mandatory compensation?</p>
-                    <div class="radio-group">
-                        <input type="radio" id="paidYes" name="paidCompensation" value="Yes" onclick="toggleCompensationAmount(true)">
-                        <label for="paidYes">Yes, include compensation.</label>
-                        <input type="radio" id="paidNo" name="paidCompensation" value="No" checked onclick="toggleCompensationAmount(false)">
-                        <label for="paidNo">No, compensation is voluntary/unnecessary.</label>
-                    </div>
-
-                    <div id="compensation-details" class="hidden-field">
-                        <label for="compensationAmount">Compensation Amount (Per Participant/Day):</label>
-                        <input type="number" id="compensationAmount" name="compensationAmount" min="1" placeholder="$50.00" value="0">
-                        <p class="help-text">This value will be used to calculate the preliminary compensation fund, significantly impacting the final quote.</p>
-                    </div>
-                </fieldset>
-
-                <fieldset>
-                    <legend>Final Details & Payment</legend>
-                    <label for="budget">Selected Price Tier (Starting Investment):</label>
-                    <input type="text" id="budget" name="budget" readonly value="$0">
-                    
-                    <label for="fullName">Client Full Name:</label>
-                    <input type="text" id="fullName" name="fullName" required>
-
-                    <p><em>*Note: Payment section is placeholder. Real payment integration occurs after quote approval.</em></p>
-                    <button type="submit" class="cta-button">Submit Request & Review Quote</button>
-                </fieldset>
-            </form>
-            <div id="submission-message" class="message-box success-box" style="display:none;"></div>
+        <section id="planning-steps">
+            <h2>Your 4 Steps to a Custom Holiday</h2>
+            <ol class="steps-list">
+                <li>
+                    <strong>Step 1: Choose Your Tier & Submit Concept.</strong>
+                    <p>Select your starting tier ($10k, $25k, $50k) and fill out the detailed form on the Rent page with your desired dates, scope (Private/Public), and holiday concept.</p>
+                </li>
+                <li>
+                    <strong>Step 2: Feasibility & Quote.</strong>
+                    <p>Our temporal logistics team reviews your submission. If you choose public compensation, we calculate the estimated total cost and provide a final, itemized quote for approval.</p>
+                </li>
+                <li>
+                    <strong>Step 3: Contract & Funding.</strong>
+                    <p>Upon quote acceptance, the contract is finalized. You fund the total cost (Tier + Compensation/Logistics Fees) via the payment portal.</p>
+                </li>
+                <li>
+                    <strong>Step 4: Activation & Enjoyment.</strong>
+                    <p>ChronoLeisure handles all necessary communications and logistical activation. Your custom holiday begins on your specified start date!</p>
+                </li>
+            </ol>
         </section>
     </main>
     <footer>
@@ -90,4 +91,3 @@
     <script src="scripts/script.js"></script>
 </body>
 </html>
-

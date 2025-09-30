@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Holiday Rentals - News & Updates</title>
+    <title>ChronoLeisure - News & Updates</title>
+    <!-- Updated CSS paths -->
     <link rel="stylesheet" href="styles/larger.css" media="(min-width: 600px)">
     <link rel="stylesheet" href="styles/mobil.css" media="(max-width: 599px)">
 </head>
@@ -14,29 +15,31 @@
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="aboutus.html">About Us</a></li>
-                <li><a href="Pricing.html">Pricing</a></li>
-                <li><a href="Rent.html">Rent Holiday</a></li>
-                <li><a href="newsinfo.html">News & Updates</a></li>
+                <li><a href="Pricing.html">Pricing & Steps</a></li>
+                <li><a href="Rent.html">Plan & Rent</a></li>
+                <li><a href="newsinfo.html">News & Calendar</a></li>
             </ul>
         </nav>
     </header>
     <main>
         <section id="next-holiday-section">
-            <h2>Next Scheduled Holiday:</h2>
-            <div id="nextHolidayDisplay">
+            <h2>The Next Temporal Event:</h2>
+            <!-- Content will be populated by JavaScript -->
+            <div id="nextHolidayDisplay" class="holiday-display-card">
                 <p>Loading next holiday...</p>
             </div>
         </section>
 
         <section id="holiday-list">
-            <h2>All Upcoming Holidays</h2>
-            <ul id="upcomingHolidays">
+            <h2>All Upcoming ChronoLeisure Events</h2>
+            <!-- List will be populated by JavaScript -->
+            <ul id="upcomingHolidays" class="styled-list">
                 <li>*Upcoming holiday list loading...*</li>
             </ul>
         </section>
     </main>
     <footer>
-        <p>&copy; 2025 Holiday Rentals Inc.</p>
+        <p>&copy; 2025 ChronoLeisure Solutions | Redefining Time.</p>
     </footer>
     <script src="scripts/script.js"></script>
 </body>

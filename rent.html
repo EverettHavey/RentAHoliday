@@ -3,65 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Holiday Rentals - Rent a Holiday</title>
+    <title>ChronoLeisure - Plan & Rent Holiday</title>
+    <!-- Updated CSS paths -->
     <link rel="stylesheet" href="styles/larger.css" media="(min-width: 600px)">
     <link rel="stylesheet" href="styles/mobil.css" media="(max-width: 599px)">
 </head>
 <body>
     <header>
-        <h1>Rent Your Custom Holiday</h1>
+        <h1>Plan Your Custom Holiday</h1>
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="aboutus.html">About Us</a></li>
-                <li><a href="Pricing.html">Pricing</a></li>
-                <li><a href="Rent.html">Rent Holiday</a></li>
-                <li><a href="newsinfo.html">News & Updates</a></li>
+                <li><a href="Pricing.html">Pricing & Steps</a></li>
+                <li><a href="Rent.html">Plan & Rent</a></li>
+                <li><a href="newsinfo.html">News & Calendar</a></li>
             </ul>
         </nav>
     </header>
     <main>
         <section id="holiday-form-section">
-            <h2>Holiday Customization Form</h2>
-            <form id="rentalForm">
+            <h2>Detailed Holiday Design Request</h2>
+            <form id="rentalForm" class="professional-form">
+                
                 <fieldset>
-                    <legend>Holiday Details</legend>
+                    <legend>Design & Scope</legend>
 
-                    <label for="startDate">Desired Start Date:</label>
+                    <label for="holidayImage">Holiday Visual Concept (Upload Image/Logo)</label>
+                    <input type="file" id="holidayImage" name="holidayImage" accept="image/*">
+                    <p class="help-text">Please upload a file that visually represents your holiday concept.</p>
+
+                    <label for="theme">Holiday Name / Concept Summary:</label>
+                    <input type="text" id="theme" name="theme" placeholder="e.g., 'Global Reading Day' or 'Silent World Tuesday'" required>
+
+                    <label for="startDate">Holiday Start Date:</label>
                     <input type="date" id="startDate" name="startDate" required>
 
-                    <label for="duration">Duration (Days):</label>
-                    <input type="number" id="duration" name="duration" min="1" max="365" value="1" required>
+                    <label for="endDate">Holiday End Date:</label>
+                    <input type="date" id="endDate" name="endDate" required>
 
-                    <p>Scope of Holiday:</p>
-                    <input type="radio" id="youOnly" name="scope" value="You Only" required>
-                    <label for="youOnly">You Only (Exclusive)</label><br>
-                    <input type="radio" id="worldWide" name="scope" value="World Wide">
-                    <label for="worldWide">World Wide (Public/Shared)</label>
-
-                    <label for="theme">Holiday Theme/Concept:</label>
-                    <textarea id="theme" name="theme" rows="4" placeholder="e.g., A global 'No Phones' day, or a private 'Medieval Tech Retreat'"></textarea>
-
-                    <label for="budget">Selected Price Tier (for reference):</label>
-                    <input type="text" id="budget" name="budget" readonly value="$0">
+                    <label for="scope">Holiday Scope:</label>
+                    <select id="scope" name="scope" required>
+                        <option value="">-- Select Scope --</option>
+                        <option value="You Only">Private (You Only)</option>
+                        <option value="Group">Private (Small Group/Family)</option>
+                        <option value="World Wide">World Wide (Public)</option>
+                    </select>
                 </fieldset>
 
                 <fieldset>
-                    <legend>Payment Information (Placeholder)</legend>
-                    <p>This section is for demonstration. **Real payment processing requires a secure backend service (e.g., Stripe, PayPal integration).**</p>
-                    <label for="cardName">Name on Card:</label>
-                    <input type="text" id="cardName" required>
-                    <label for="cardNumber">Card Number:</label>
-                    <input type="text" id="cardNumber" placeholder="xxxx xxxx xxxx xxxx" required>
+                    <legend>Compensation Logistics (Public Holidays Only)</legend>
+                    
+                    <p>Should the participants of this holiday receive mandatory compensation?</p>
+                    <div class="radio-group">
+                        <input type="radio" id="paidYes" name="paidCompensation" value="Yes" onclick="toggleCompensationAmount(true)">
+                        <label for="paidYes">Yes, include compensation.</label>
+                        <input type="radio" id="paidNo" name="paidCompensation" value="No" checked onclick="toggleCompensationAmount(false)">
+                        <label for="paidNo">No, compensation is voluntary/unnecessary.</label>
+                    </div>
+
+                    <div id="compensation-details" class="hidden-field">
+                        <label for="compensationAmount">Compensation Amount (Per Participant/Day):</label>
+                        <input type="number" id="compensationAmount" name="compensationAmount" min="1" placeholder="$50.00" value="0">
+                        <p class="help-text">This value will be used to calculate the preliminary compensation fund, significantly impacting the final quote.</p>
+                    </div>
                 </fieldset>
 
-                <button type="submit" class="cta-button">Submit & Process Payment</button>
+                <fieldset>
+                    <legend>Final Details & Payment</legend>
+                    <label for="budget">Selected Price Tier (Starting Investment):</label>
+                    <input type="text" id="budget" name="budget" readonly value="$0">
+                    
+                    <label for="fullName">Client Full Name:</label>
+                    <input type="text" id="fullName" name="fullName" required>
+
+                    <p><em>*Note: Payment section is placeholder. Real payment integration occurs after quote approval.</em></p>
+                    <button type="submit" class="cta-button">Submit Request & Review Quote</button>
+                </fieldset>
             </form>
-            <p id="submissionMessage" style="display:none; color: green;"></p>
+            <div id="submission-message" class="message-box success-box" style="display:none;"></div>
         </section>
     </main>
     <footer>
-        <p>&copy; 2025 Holiday Rentals Inc.</p>
+        <p>&copy; 2025 ChronoLeisure Solutions | Redefining Time.</p>
     </footer>
     <script src="scripts/script.js"></script>
 </body>

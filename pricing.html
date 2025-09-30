@@ -3,59 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Holiday Rentals - Pricing</title>
+    <title>ChronoLeisure - Pricing & Planning Steps</title>
+    <!-- Updated CSS paths -->
     <link rel="stylesheet" href="styles/larger.css" media="(min-width: 600px)">
     <link rel="stylesheet" href="styles/mobil.css" media="(max-width: 599px)">
 </head>
 <body>
     <header>
-        <h1>Holiday Pricing Tiers</h1>
+        <h1>Investment in Temporal Design</h1>
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="aboutus.html">About Us</a></li>
-                <li><a href="Pricing.html">Pricing</a></li>
-                <li><a href="Rent.html">Rent Holiday</a></li>
-                <li><a href="newsinfo.html">News & Updates</a></li>
+                <li><a href="Pricing.html">Pricing & Steps</a></li>
+                <li><a href="Rent.html">Plan & Rent</a></li>
+                <li><a href="newsinfo.html">News & Calendar</a></li>
             </ul>
         </nav>
     </header>
-    <main class="pricing-container">
-        <section class="price-tier">
-            <h2>The Explorer</h2>
-            <p class="price-tag">$10,000</p>
-            <ul>
-                <li>Single-day private event</li>
-                <li>Local or regional scope</li>
-                <li>Custom theme planning</li>
-            </ul>
-            <a href="Rent.html?tier=10k" class="cta-button">Select Tier</a>
+    <main>
+        <section id="pricing-tiers">
+            <h2>Our Core Service Tiers</h2>
+            <div class="pricing-container">
+                <div class="price-tier">
+                    <h3>$10,000 | The Local Explorer</h3>
+                    <p class="price-tag">$10k</p>
+                    <ul>
+                        <li>Private (You Only) or Small Group Scope</li>
+                        <li>Duration up to 24 hours</li>
+                        <li>Basic Theme Planning and Execution</li>
+                        <li>Ideal for personal milestones or small corporate retreats.</li>
+                    </ul>
+                    <a href="Rent.html?tier=10000" class="cta-button">Start with $10k Tier</a>
+                </div>
+
+                <div class="price-tier featured">
+                    <h3>$25,000 | The Regional Disruptor</h3>
+                    <p class="price-tag">$25k</p>
+                    <ul>
+                        <li>Private or Regional Public Scope (e.g., a single country or state)</li>
+                        <li>Duration up to 72 hours</li>
+                        <li>Advanced Logistics and Integration Support</li>
+                        <li>Covers compensation administration fees for public options.</li>
+                    </ul>
+                    <a href="Rent.html?tier=25000" class="cta-button">Start with $25k Tier</a>
+                </div>
+
+                <div class="price-tier">
+                    <h3>$50,000 | The Global Chronomancer</h3>
+                    <p class="price-tag">$50k</p>
+                    <ul>
+                        <li>Exclusive "You Only" or Full World Wide Public Scope</li>
+                        <li>Custom Duration and Full Temporal Integration</li>
+                        <li>Dedicated Logistical and PR Team</li>
+                        <li>Priority scheduling and compensation fund management.</li>
+                    </ul>
+                    <a href="Rent.html?tier=50000" class="cta-button">Start with $50k Tier</a>
+                </div>
+            </div>
         </section>
 
-        <section class="price-tier featured">
-            <h2>The Global Nomad</h2>
-            <p class="price-tag">$25,000</p>
-            <ul>
-                <li>Up to 3-day private event</li>
-                <li>Multi-region/continental scope</li>
-                <li>Inclusion in one "World Wide Holiday" event</li>
-            </ul>
-            <a href="Rent.html?tier=25k" class="cta-button">Select Tier</a>
-        </section>
-
-        <section class="price-tier">
-            <h2>The Time Weaver</h2>
-            <p class="price-tag">$50,000</p>
-            <ul>
-                <li>Custom duration (up to 7 days)</li>
-                <li>Exclusive "You Only" holiday creation</li>
-                <li>Global-level event coordination</li>
-            </ul>
-            <a href="Rent.html?tier=50k" class="cta-button">Select Tier</a>
+        <section id="planning-steps">
+            <h2>Your 4 Steps to a Custom Holiday</h2>
+            <ol class="steps-list">
+                <li>
+                    <strong>Step 1: Choose Your Tier & Submit Concept.</strong>
+                    <p>Select your starting tier ($10k, $25k, $50k) and fill out the detailed form on the Rent page with your desired dates, scope (Private/Public), and holiday concept.</p>
+                </li>
+                <li>
+                    <strong>Step 2: Feasibility & Quote.</strong>
+                    <p>Our temporal logistics team reviews your submission. If you choose public compensation, we calculate the estimated total cost and provide a final, itemized quote for approval.</p>
+                </li>
+                <li>
+                    <strong>Step 3: Contract & Funding.</strong>
+                    <p>Upon quote acceptance, the contract is finalized. You fund the total cost (Tier + Compensation/Logistics Fees) via the payment portal.</p>
+                </li>
+                <li>
+                    <strong>Step 4: Activation & Enjoyment.</strong>
+                    <p>ChronoLeisure handles all necessary communications and logistical activation. Your custom holiday begins on your specified start date!</p>
+                </li>
+            </ol>
         </section>
     </main>
     <footer>
-        <p>&copy; 2025 Holiday Rentals Inc.</p>
+        <p>&copy; 2025 ChronoLeisure Solutions | Redefining Time.</p>
     </footer>
     <script src="scripts/script.js"></script>
 </body>

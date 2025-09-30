@@ -1,32 +1,67 @@
-/* Inherit base styles, then apply mobile-specific adjustments */
-@import url("larger.css"); /* Import larger CSS as a base */
+/* Mobile Styles: Adjustments for screens up to 599px */
 
-header h1 {
-    font-size: 1.5em;
+/* Import larger CSS for base styles */
+@import url("larger.css");
+
+/* Header and Navigation adjustments */
+header {
+    padding: 1em 10px;
 }
-
 nav ul {
     flex-direction: column;
+    margin-top: 10px;
 }
-
 nav ul li {
     margin: 5px 0;
 }
+nav ul li a {
+    display: block;
+    padding: 10px 0;
+}
 
 main {
-    padding: 10px;
+    padding: 15px 10px 60px 10px;
+}
+section {
+    padding: 15px;
 }
 
-/* Mobile Pricing Layout */
+/* INDEX.HTML */
+#hero {
+    flex-direction: column;
+    gap: 20px;
+}
+.grid-3 {
+    grid-template-columns: 1fr; /* Stack columns */
+}
+
+/* ABOUTUS.HTML */
+.grid-2 {
+    grid-template-columns: 1fr; /* Stack columns */
+}
+
+/* PRICING.HTML */
 .pricing-container {
-    flex-direction: column; /* Stacks pricing tiers vertically */
+    flex-direction: column; /* Stack pricing tiers */
 }
-
 .price-tier {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    transform: none !important; /* Remove scaling effect for touch/mobile */
+}
+.price-tier.featured {
+    box-shadow: 0 4px 10px rgba(255, 102, 0, 0.2);
 }
 
-/* Remove fixed footer on small screens to prevent covering content */
+/* RENT.HTML */
+/* Form fields remain full width, which is ideal for mobile */
+.radio-group label {
+    display: block;
+    margin-right: 0;
+    margin-bottom: 5px;
+}
+
+/* Footer adjustment */
 footer {
-    position: static;
+    position: static; /* Remove fixed position on small screens */
+    padding: 1em 10px;
 }

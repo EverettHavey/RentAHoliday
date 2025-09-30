@@ -1,28 +1,131 @@
-// Data for the News and Upcoming Holidays page (newsinfo.html)
 const upcomingHolidays = [
     {
         date: "2025-10-01",
         name: "Universal No School Day",
         description: "A synchronized worldwide day off for students aged 7-18 to promote mental health and unstructured play. Coordinated with over 50 countries!",
-        type: "World Wide"
+        type: "World Wide",
+        scope: "Public",
+        image: "https://placehold.co/600x200/004d99/ffffff?text=School+Out+Day"
+    },
+    {
+        date: "2025-11-11",
+        name: "Veterans Day",
+        description: "An annual United States federal holiday honoring military veterans.",
+        type: "National",
+        scope: "Public",
+        image: "https://placehold.co/600x200/4a4e69/ffffff?text=Veterans+Day"
     },
     {
         date: "2025-11-15",
         name: "Global Digital Detox",
         description: "A 48-hour period where all non-essential internet services are symbolically paused. Encourage real-world interaction.",
-        type: "World Wide"
+        type: "World Wide",
+        scope: "Public",
+        image: "https://placehold.co/600x200/ff6600/ffffff?text=Digital+Detox"
+    },
+    {
+        date: "2025-11-27",
+        name: "Thanksgiving Day",
+        description: "A United States federal holiday to celebrate the harvest and other blessings of the past year.",
+        type: "National",
+        scope: "Public",
+        image: "https://placehold.co/600x200/e07a5f/ffffff?text=Thanksgiving"
     },
     {
         date: "2025-12-24",
         name: "Private Aurora Borealis Watch",
         description: "A private, exclusive holiday for one client: guaranteed perfect viewing of the Northern Lights from a custom-built orbital platform.",
-        type: "You Only"
+        type: "You Only",
+        scope: "Private",
+        image: "https://placehold.co/600x200/1d3557/ffffff?text=Private+Aurora+Watch"
+    },
+    {
+        date: "2025-12-25",
+        name: "Christmas Day",
+        description: "A United States federal holiday celebrating the birth of Jesus Christ.",
+        type: "National",
+        scope: "Public",
+        image: "https://placehold.co/600x200/40916c/ffffff?text=Christmas+Day"
+    },
+    {
+        date: "2026-01-01",
+        name: "New Year's Day",
+        description: "A United States federal holiday celebrating the start of the Gregorian calendar year.",
+        type: "National",
+        scope: "Public",
+        image: "https://placehold.co/600x200/5a189a/ffffff?text=New+Years+Day"
     },
     {
         date: "2026-01-05",
         name: "First Contact Anniversary",
         description: "A day to celebrate all forms of connection and communication across cultures. Public festivals and private retreats available.",
-        type: "World Wide"
+        type: "World Wide",
+        scope: "Public",
+        image: "https://placehold.co/600x200/2a9d8f/ffffff?text=Contact+Anniversary"
+    },
+    {
+        date: "2026-01-19",
+        name: "M.L. King, Jr.'s Day",
+        description: "A United States federal holiday marking the birthday of Martin Luther King Jr.",
+        type: "National",
+        scope: "Public",
+        image: "https://placehold.co/600x200/0077b6/ffffff?text=MLK+Day"
+    },
+    {
+        date: "2026-02-16",
+        name: "Washington's Birthday (Presidents' Day)",
+        description: "A United States federal holiday celebrating George Washington and Abraham Lincoln, often called Presidents' Day.",
+        type: "National",
+        scope: "Public",
+        image: "https://placehold.co/600x200/03045e/ffffff?text=Presidents+Day"
+    },
+    {
+        date: "2026-03-20",
+        name: "The Equinox Reset",
+        description: "A simple, private 24-hour holiday for a single corporate client focused on reorganizing workflows and strategic planning.",
+        type: "Group",
+        scope: "Private",
+        image: "https://placehold.co/600x200/f2cc8f/ffffff?text=Equinox+Reset"
+    },
+    {
+        date: "2026-05-25",
+        name: "Memorial Day",
+        description: "A United States federal holiday honoring the men and women who died while serving in the U.S. military.",
+        type: "National",
+        scope: "Public",
+        image: "https://placehold.co/600x200/a41623/ffffff?text=Memorial+Day"
+    },
+    {
+        date: "2026-06-19",
+        name: "Juneteenth National Independence Day",
+        description: "A United States federal holiday commemorating the emancipation of enslaved African Americans.",
+        type: "National",
+        scope: "Public",
+        image: "https://placehold.co/600x200/3a0ca3/ffffff?text=Juneteenth"
+    },
+    {
+        date: "2026-07-04",
+        name: "Independence Day",
+        description: "A United States federal holiday commemorating the Declaration of Independence.",
+        type: "National",
+        scope: "Public",
+        image: "https://placehold.co/600x200/00b4d8/ffffff?text=Independence+Day"
+    },
+    {
+        date: "2026-09-07",
+        name: "Labor Day",
+        description: "A United States federal holiday celebrating the contributions of American workers.",
+        type: "National",
+        scope: "Public",
+        image: "https://placehold.co/600x200/007f5f/ffffff?text=Labor+Day"
+    },
+    {
+        date: "2026-10-12",
+        name: "Columbus Day",
+        description: "A United States federal holiday commemorating the arrival of Christopher Columbus in the Americas.",
+        type: "National",
+        scope: "Public",
+        image: "https://placehold.co/600x200/f77f00/ffffff?text=Columbus+Day"
     }
 ];
 
@@ -50,8 +153,13 @@ function getNextHoliday() {
  * @returns {string} Formatted date.
  */
 function formatDate(dateString) {
+    // Check for valid date string to prevent errors
+    if (!dateString) return 'TBD';
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) return 'Invalid Date';
+
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString(undefined, options);
+    return date.toLocaleDateString(undefined, options);
 }
 
 // --- Page Specific Logic ---
@@ -67,23 +175,58 @@ function handleNewsInfoPage() {
     // 1. Display Next Holiday
     if (nextHoliday) {
         nextHolidayDisplay.innerHTML = `
+            <img src="${nextHoliday.image}" alt="${nextHoliday.name} concept image" style="width: 100%; max-height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 10px;">
             <h3>${nextHoliday.name}</h3>
             <p><strong>Date:</strong> ${formatDate(nextHoliday.date)}</p>
-            <p><strong>Scope:</strong> ${nextHoliday.type}</p>
+            <p><strong>Scope:</strong> ${nextHoliday.scope} / ${nextHoliday.type}</p>
             <p>${nextHoliday.description}</p>
         `;
     } else {
-        nextHolidayDisplay.innerHTML = '<p>No new holidays are currently scheduled.</p>';
+        nextHolidayDisplay.innerHTML = '<p>No new holidays are currently scheduled. Check back soon!</p>';
     }
 
     // 2. Display All Upcoming Holidays
     upcomingHolidaysList.innerHTML = ''; // Clear initial loading message
-    upcomingHolidays.forEach(holiday => {
+    // Sort all holidays to display them chronologically
+    const sortedHolidays = [...upcomingHolidays].sort((a, b) => new Date(a.date) - new Date(b.date));
+
+    sortedHolidays.forEach(holiday => {
         const listItem = document.createElement('li');
-        listItem.innerHTML = `<strong>${formatDate(holiday.date)}:</strong> ${holiday.name} (${holiday.type}) - ${holiday.description}`;
+        // Added image display to the list item with inline styles for layout
+        listItem.innerHTML = `
+            <div style="display: flex; gap: 15px; align-items: center;">
+                <img src="${holiday.image}" alt="${holiday.name} icon" style="width: 60px; height: 60px; border-radius: 4px; object-fit: cover;">
+                <div>
+                    <strong>${formatDate(holiday.date)}:</strong>
+                    ${holiday.name}
+                    (<span style="color: ${holiday.scope === 'Public' ? '#ff6600' : '#004d99'}; font-weight: bold;">${holiday.scope}</span>) 
+                    <br>${holiday.description}
+                </div>
+            </div>
+        `;
         upcomingHolidaysList.appendChild(listItem);
     });
 }
+
+/**
+ * Toggles the visibility of the compensation amount field based on the radio button selection.
+ * This function is called directly from the onclick handlers in Rent.html.
+ * @param {boolean} show If true, shows the field; otherwise, hides it.
+ */
+window.toggleCompensationAmount = function(show) {
+    const compensationDetails = document.getElementById('compensation-details');
+    if (show) {
+        compensationDetails.classList.add('visible');
+        document.getElementById('compensationAmount').setAttribute('required', 'required');
+        document.getElementById('compensationAmount').setAttribute('min', '1');
+    } else {
+        compensationDetails.classList.remove('visible');
+        document.getElementById('compensationAmount').removeAttribute('required');
+        document.getElementById('compensationAmount').removeAttribute('min');
+        document.getElementById('compensationAmount').value = 0; // Reset value
+    }
+};
+
 
 /**
  * Logic for Rent.html
@@ -91,36 +234,72 @@ function handleNewsInfoPage() {
 function handleRentalPage() {
     const rentalForm = document.getElementById('rentalForm');
     const budgetInput = document.getElementById('budget');
-    const submissionMessage = document.getElementById('submissionMessage');
+    const scopeSelect = document.getElementById('scope');
+    const paidNoRadio = document.getElementById('paidNo');
+    const submissionMessage = document.getElementById('submission-message');
 
     // 1. Pre-fill budget based on URL parameter (from Pricing.html links)
     const urlParams = new URLSearchParams(window.location.search);
     const tier = urlParams.get('tier');
     if (tier) {
-        budgetInput.value = `$${tier.toUpperCase()}`;
+        budgetInput.value = `$${Number(tier).toLocaleString('en-US')}`;
     }
+
+    // Ensure compensation details are hidden and 'No' is selected initially
+    toggleCompensationAmount(false);
+    paidNoRadio.checked = true;
+
+    // Optional: Auto-select Public scope if paid compensation is relevant
+    const compensationDetails = document.getElementById('compensation-details');
+    compensationDetails.addEventListener('change', (event) => {
+        const target = event.target;
+        // If 'Yes' is selected for compensation, suggest 'World Wide' scope if not already selected
+        if (target.id === 'paidYes' && target.checked && scopeSelect.value !== 'World Wide') {
+             // For simplicity, we just log a message, but you might want a custom modal here
+             console.log("Compensation selected. Remember, mandatory compensation primarily applies to 'World Wide' public holidays.");
+        }
+    });
+
 
     // 2. Form Submission Handler
     if (rentalForm) {
         rentalForm.addEventListener('submit', function(event) {
             event.preventDefault();
 
-            // *** WARNING: This is a placeholder for form submission and payment. ***
-            // *** NEVER process real payment data with client-side JavaScript alone. ***
+            // *** Placeholder Logic: Validate Dates and Compensation ***
+            const startDate = new Date(document.getElementById('startDate').value);
+            const endDate = new Date(document.getElementById('endDate').value);
+            const scope = scopeSelect.value;
+            const paidCompensation = document.querySelector('input[name="paidCompensation"]:checked').value;
+            const compensationAmount = Number(document.getElementById('compensationAmount').value);
 
-            // Gather form data (just for display purposes)
-            const formData = new FormData(rentalForm);
-            const holidayDetails = Object.fromEntries(formData.entries());
+            if (startDate > endDate) {
+                submissionMessage.textContent = 'Error: The Holiday Start Date cannot be after the End Date.';
+                submissionMessage.className = 'message-box error-box';
+                submissionMessage.style.display = 'block';
+                return;
+            }
 
-            console.log('Holiday Request Submitted:', holidayDetails);
-
-            // Display a success message
-            submissionMessage.textContent = 'Thank you! Your holiday request has been submitted for review and payment processing. A representative will contact you shortly.';
+            if (paidCompensation === 'Yes' && compensationAmount <= 0) {
+                 submissionMessage.textContent = 'Error: Compensation amount must be greater than $0 if selected.';
+                 submissionMessage.className = 'message-box error-error-box';
+                 submissionMessage.style.display = 'block';
+                 return;
+            }
+            
+            // --- Success Path ---
+            submissionMessage.textContent = `
+                Request Submitted! We are analyzing your custom holiday concept 
+                (${document.getElementById('theme').value}) for feasibility. 
+                A final quote based on your ${scope} scope and compensation choice will be sent shortly.
+            `;
+            submissionMessage.className = 'message-box success-box';
             submissionMessage.style.display = 'block';
 
-            // Optional: Reset form after submission
             rentalForm.reset();
-            budgetInput.value = '$0'; // Reset budget field manually
+            budgetInput.value = '$0';
+            toggleCompensationAmount(false); // Hide compensation field again
+            paidNoRadio.checked = true;
         });
     }
 }
@@ -137,5 +316,4 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (path.includes('Rent.html')) {
         handleRentalPage();
     }
-    // Add logic for other pages if needed
 });

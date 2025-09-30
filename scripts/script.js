@@ -1,3 +1,4 @@
+// Data for the News and Upcoming Holidays page (newsinfo.html)
 const upcomingHolidays = [
     {
         date: "2025-10-01",
@@ -86,6 +87,14 @@ const upcomingHolidays = [
         type: "Group",
         scope: "Private",
         image: "https://placehold.co/600x200/f2cc8f/ffffff?text=Equinox+Reset"
+    },
+    {
+        date: "2026-04-07",
+        name: "Global Health & Wellness Day",
+        description: "A day dedicated to promoting physical and mental well-being, featuring free meditation retreats and outdoor activities.",
+        type: "World Wide",
+        scope: "Public",
+        image: "https://placehold.co/600x200/4c9568/ffffff?text=Health+Wellness"
     },
     {
         date: "2026-05-25",
@@ -273,6 +282,11 @@ function handleRentalPage() {
             const paidCompensation = document.querySelector('input[name="paidCompensation"]:checked').value;
             const compensationAmount = Number(document.getElementById('compensationAmount').value);
 
+            // --- NEW FIELDS ---
+            // NOTE: The IDs 'recurrence' and 'paymentOption' must be present in your Rent.html form!
+            const recurrence = document.getElementById('recurrence')?.value || 'Not Specified';
+            const paymentOption = document.getElementById('paymentOption')?.value || 'Not Specified';
+            
             if (startDate > endDate) {
                 submissionMessage.textContent = 'Error: The Holiday Start Date cannot be after the End Date.';
                 submissionMessage.className = 'message-box error-box';
@@ -288,10 +302,14 @@ function handleRentalPage() {
             }
             
             // --- Success Path ---
-            submissionMessage.textContent = `
-                Request Submitted! We are analyzing your custom holiday concept 
-                (${document.getElementById('theme').value}) for feasibility. 
-                A final quote based on your ${scope} scope and compensation choice will be sent shortly.
+            submissionMessage.innerHTML = `
+                <h3>Request Submitted!</h3>
+                <p>We are analyzing your custom holiday concept (${document.getElementById('theme').value}) for feasibility.</p>
+                <div style="margin-top: 10px; padding: 10px; border: 1px dashed #ccc; border-radius: 4px;">
+                    <strong>Recurrence:</strong> ${recurrence} <br>
+                    <strong>Payment Method:</strong> ${paymentOption}
+                </div>
+                <p style="margin-top: 10px;">A final quote based on your ${scope} scope and compensation choice will be sent shortly.</p>
             `;
             submissionMessage.className = 'message-box success-box';
             submissionMessage.style.display = 'block';

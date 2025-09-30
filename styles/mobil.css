@@ -1,0 +1,32 @@
+/* Inherit base styles, then apply mobile-specific adjustments */
+@import url("larger.css"); /* Import larger CSS as a base */
+
+header h1 {
+    font-size: 1.5em;
+}
+
+nav ul {
+    flex-direction: column;
+}
+
+nav ul li {
+    margin: 5px 0;
+}
+
+main {
+    padding: 10px;
+}
+
+/* Mobile Pricing Layout */
+.pricing-container {
+    flex-direction: column; /* Stacks pricing tiers vertically */
+}
+
+.price-tier {
+    margin-bottom: 15px;
+}
+
+/* Remove fixed footer on small screens to prevent covering content */
+footer {
+    position: static;
+}

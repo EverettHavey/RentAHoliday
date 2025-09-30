@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holiday Rentals - Rent a Holiday</title>
+    <link rel="stylesheet" href="larger.css" media="(min-width: 600px)">
+    <link rel="stylesheet" href="mobil.css" media="(max-width: 599px)">
+</head>
+<body>
+    <header>
+        <h1>Rent Your Custom Holiday</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="aboutus.html">About Us</a></li>
+                <li><a href="Pricing.html">Pricing</a></li>
+                <li><a href="Rent.html">Rent Holiday</a></li>
+                <li><a href="newsinfo.html">News & Updates</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="holiday-form-section">
+            <h2>Holiday Customization Form</h2>
+            <form id="rentalForm">
+                <fieldset>
+                    <legend>Holiday Details</legend>
+
+                    <label for="startDate">Desired Start Date:</label>
+                    <input type="date" id="startDate" name="startDate" required>
+
+                    <label for="duration">Duration (Days):</label>
+                    <input type="number" id="duration" name="duration" min="1" max="365" value="1" required>
+
+                    <p>Scope of Holiday:</p>
+                    <input type="radio" id="youOnly" name="scope" value="You Only" required>
+                    <label for="youOnly">You Only (Exclusive)</label><br>
+                    <input type="radio" id="worldWide" name="scope" value="World Wide">
+                    <label for="worldWide">World Wide (Public/Shared)</label>
+
+                    <label for="theme">Holiday Theme/Concept:</label>
+                    <textarea id="theme" name="theme" rows="4" placeholder="e.g., A global 'No Phones' day, or a private 'Medieval Tech Retreat'"></textarea>
+
+                    <label for="budget">Selected Price Tier (for reference):</label>
+                    <input type="text" id="budget" name="budget" readonly value="$0">
+                </fieldset>
+
+                <fieldset>
+                    <legend>Payment Information (Placeholder)</legend>
+                    <p>This section is for demonstration. **Real payment processing requires a secure backend service (e.g., Stripe, PayPal integration).**</p>
+                    <label for="cardName">Name on Card:</label>
+                    <input type="text" id="cardName" required>
+                    <label for="cardNumber">Card Number:</label>
+                    <input type="text" id="cardNumber" placeholder="xxxx xxxx xxxx xxxx" required>
+                </fieldset>
+
+                <button type="submit" class="cta-button">Submit & Process Payment</button>
+            </form>
+            <p id="submissionMessage" style="display:none; color: green;"></p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Holiday Rentals Inc.</p>
+    </footer>
+    <script src="scripts/script.js"></script>
+</body>
+</html>

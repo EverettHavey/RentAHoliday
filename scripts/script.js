@@ -1,4 +1,3 @@
-// Data for the News and Upcoming Holidays page (newsinfo.html)
 const upcomingHolidays = [
     {
         date: "2025-10-01",
@@ -140,8 +139,6 @@ const upcomingHolidays = [
 
 // --- Utility Functions ---
 
-// ... (existing getNextHoliday and formatDate functions remain the same) ...
-
 /**
  * Finds the next upcoming holiday from the list based on the current date.
  * @returns {object|null} The next holiday object or null if none are future-dated.
@@ -185,7 +182,8 @@ window.updateTotalAmount = function() {
     const startDateInput = document.getElementById('startDate');
     const endDateInput = document.getElementById('endDate');
     const paidCompensation = document.querySelector('input[name="paidCompensation"]:checked')?.value;
-    const compensationAmountInput = document.getElementById('compensationAmount');
+    // Compensation amount is now read from the selected option value (a string that must be converted to number)
+    const compensationAmountSelect = document.getElementById('compensationAmount');
 
     // Display elements
     const baseInvestmentDisplay = document.getElementById('base-investment');
@@ -212,8 +210,8 @@ window.updateTotalAmount = function() {
     let compensationEstimate = 0;
     const participantEstimate = 100; // Placeholder estimate for 'World Wide' public holiday compensation
 
-    if (paidCompensation === 'Yes' && compensationAmountInput.value) {
-        const compPerPersonPerDay = Number(compensationAmountInput.value);
+    if (paidCompensation === 'Yes' && compensationAmountSelect.value && compensationAmountSelect.value !== '0') {
+        const compPerPersonPerDay = Number(compensationAmountSelect.value);
         if (compPerPersonPerDay > 0) {
             // Estimate = Compensation per person/day * Estimated Participants * Duration Days
             compensationEstimate = compPerPersonPerDay * participantEstimate * durationDays;
@@ -290,15 +288,15 @@ function handleNewsInfoPage() {
  */
 window.toggleCompensationAmount = function(show) {
     const compensationDetails = document.getElementById('compensation-details');
+    const compensationAmountSelect = document.getElementById('compensationAmount');
+
     if (show) {
         compensationDetails.classList.add('visible');
-        document.getElementById('compensationAmount').setAttribute('required', 'required');
-        document.getElementById('compensationAmount').setAttribute('min', '1');
+        compensationAmountSelect.setAttribute('required', 'required');
     } else {
         compensationDetails.classList.remove('visible');
-        document.getElementById('compensationAmount').removeAttribute('required');
-        document.getElementById('compensationAmount').removeAttribute('min');
-        document.getElementById('compensationAmount').value = 0; // Reset value
+        compensationAmountSelect.removeAttribute('required');
+        compensationAmountSelect.value = 0; // Reset value to default "Select Desired Amount"
     }
     // Call calculation after toggling visibility
     updateTotalAmount();
@@ -312,6 +310,8 @@ function handleRentalPage() {
     const rentalForm = document.getElementById('rentalForm');
     const paidNoRadio = document.getElementById('paidNo');
     const submissionMessage = document.getElementById('submission-message');
+    const scopeSelect = document.getElementById('scope');
+
 
     // Ensure compensation details are hidden and 'No' is selected initially
     toggleCompensationAmount(false);
@@ -320,66 +320,71 @@ function handleRentalPage() {
     // Set initial total amount display
     updateTotalAmount(); 
 
-    // Optional: Auto-select Public scope if paid compensation is relevant
-    const compensationDetails = document.getElementById('compensation-details');
-    const scopeSelect = document.getElementById('scope');
-    compensationDetails.addEventListener('change', (event) => {
-        const target = event.target;
-        // If 'Yes' is selected for compensation, suggest 'World Wide' scope if not already selected
-        if (target.id === 'paidYes' && target.checked && scopeSelect.value !== 'World Wide') {
-             // For simplicity, we just log a message, but you might want a custom modal here
-             console.log("Compensation selected. Remember, mandatory compensation primarily applies to 'World Wide' public holidays.");
-        }
-    });
-
-
     // 2. Form Submission Handler
     if (rentalForm) {
         rentalForm.addEventListener('submit', function(event) {
             event.preventDefault();
 
-            // *** Placeholder Logic: Validate Dates and Compensation ***
-            const startDate = new Date(document.getElementById('startDate').value);
-            const endDate = new Date(document.getElementById('endDate').value);
-            const scope = scopeSelect.value;
+            // --- Form Data and Validation ---
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
             const paidCompensation = document.querySelector('input[name="paidCompensation"]:checked').value;
-            const compensationAmount = Number(document.getElementById('compensationAmount').value);
-            const recurrence = document.getElementById('recurrence')?.value || 'Not Specified';
-            const paymentOption = document.getElementById('paymentOption')?.value || 'Not Specified';
-            const finalTotalText = document.getElementById('final-total').textContent; // Get the displayed total
+            const compensationAmount = document.getElementById('compensationAmount').value;
+            const finalTotalText = document.getElementById('final-total').textContent; 
 
-            if (startDate > endDate) {
+            if (new Date(startDate) > new Date(endDate)) {
                 submissionMessage.textContent = 'Error: The Holiday Start Date cannot be after the End Date.';
                 submissionMessage.className = 'message-box error-box';
                 submissionMessage.style.display = 'block';
                 return;
             }
 
-            if (paidCompensation === 'Yes' && compensationAmount <= 0) {
-                 submissionMessage.textContent = 'Error: Compensation amount must be greater than $0 if selected.';
+            if (paidCompensation === 'Yes' && (compensationAmount === '0' || !compensationAmount)) {
+                 submissionMessage.textContent = 'Error: Compensation amount must be selected if mandatory compensation is chosen.';
                  submissionMessage.className = 'message-box error-box';
                  submissionMessage.style.display = 'block';
                  return;
             }
             
-            // --- Success Path ---
+            // --- Success Path: Collect, Store, and Display ---
+            const formData = new FormData(rentalForm);
+            const holidayDetails = {
+                theme: formData.get('theme'),
+                startDate: startDate,
+                endDate: endDate,
+                scope: formData.get('scope'),
+                recurrence: formData.get('recurrence'),
+                budgetTier: document.getElementById('budget').options[document.getElementById('budget').selectedIndex].text,
+                paidCompensation: paidCompensation,
+                compensationAmount: paidCompensation === 'Yes' ? document.getElementById('compensationAmount').options[document.getElementById('compensationAmount').selectedIndex].text : 'None',
+                paymentOption: formData.get('paymentOption'),
+                fullName: formData.get('fullName'),
+                
+                // Summary Totals (for display on new page)
+                baseInvestment: document.getElementById('base-investment').textContent,
+                compensationEstimate: document.getElementById('compensation-estimate').textContent,
+                finalTotal: finalTotalText
+            };
+
+            // Store the JSON data in localStorage
+            localStorage.setItem('createdHoliday', JSON.stringify(holidayDetails));
+
+            // Display a success message and the button
             submissionMessage.innerHTML = `
-                <h3>Request Submitted!</h3>
-                <p>We are analyzing your custom holiday concept (${document.getElementById('theme').value}) for feasibility.</p>
+                <h3>Request Submitted Successfully!</h3>
+                <p>We've received your custom holiday concept, "<strong>${holidayDetails.theme}</strong>."</p>
                 <div style="margin-top: 10px; padding: 10px; border: 1px dashed #ccc; border-radius: 4px; background-color: #f9f9f9;">
-                    <strong>Estimated Total: ${finalTotalText}</strong><br>
-                    <strong>Recurrence:</strong> ${recurrence} <br>
-                    <strong>Payment Method:</strong> ${paymentOption}
+                    <strong>Estimated Total: ${holidayDetails.finalTotal}</strong><br>
+                    <strong>Start Date:</strong> ${formatDate(holidayDetails.startDate)}
                 </div>
-                <p style="margin-top: 10px;">A final quote based on your ${scope} scope and compensation choice will be sent shortly.</p>
+                <button type="button" class="cta-button" onclick="window.location.href='newholiday.html'" style="margin-top: 20px;">
+                    View Your Holiday Details
+                </button>
             `;
             submissionMessage.className = 'message-box success-box';
             submissionMessage.style.display = 'block';
-
-            rentalForm.reset();
-            updateTotalAmount(); // Reset display totals
-            toggleCompensationAmount(false); // Hide compensation field again
-            paidNoRadio.checked = true;
+            
+            // Note: We don't call form.reset() immediately so the user can see the link/button
         });
     }
 }

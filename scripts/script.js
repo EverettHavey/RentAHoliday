@@ -1,3 +1,4 @@
+// Data for the News and Upcoming Holidays page (newsinfo.html)
 const upcomingHolidays = [
     {
         date: "2025-10-01",
@@ -5,6 +6,7 @@ const upcomingHolidays = [
         description: "A synchronized worldwide day off for students aged 7-18 to promote mental health and unstructured play. Coordinated with over 50 countries!",
         type: "World Wide",
         scope: "Public",
+        ageEligibility: "5-18", // ADDED FIELD
         image: "https://placehold.co/600x200/004d99/ffffff?text=School+Out+Day"
     },
     {
@@ -13,6 +15,7 @@ const upcomingHolidays = [
         description: "An annual United States federal holiday honoring military veterans.",
         type: "National",
         scope: "Public",
+        ageEligibility: "All Ages", // ADDED FIELD
         image: "https://placehold.co/600x200/4a4e69/ffffff?text=Veterans+Day"
     },
     {
@@ -21,6 +24,7 @@ const upcomingHolidays = [
         description: "A 48-hour period where all non-essential internet services are symbolically paused. Encourage real-world interaction.",
         type: "World Wide",
         scope: "Public",
+        ageEligibility: "18+", // ADDED FIELD
         image: "https://placehold.co/600x200/ff6600/ffffff?text=Digital+Detox"
     },
     {
@@ -29,6 +33,7 @@ const upcomingHolidays = [
         description: "A United States federal holiday to celebrate the harvest and other blessings of the past year.",
         type: "National",
         scope: "Public",
+        ageEligibility: "All Ages", // ADDED FIELD
         image: "https://placehold.co/600x200/e07a5f/ffffff?text=Thanksgiving"
     },
     {
@@ -37,6 +42,7 @@ const upcomingHolidays = [
         description: "A private, exclusive holiday for one client: guaranteed perfect viewing of the Northern Lights from a custom-built orbital platform.",
         type: "You Only",
         scope: "Private",
+        ageEligibility: "18+", // ADDED FIELD
         image: "https://placehold.co/600x200/1d3557/ffffff?text=Private+Aurora+Watch"
     },
     {
@@ -45,6 +51,7 @@ const upcomingHolidays = [
         description: "A United States federal holiday celebrating the birth of Jesus Christ.",
         type: "National",
         scope: "Public",
+        ageEligibility: "All Ages", // ADDED FIELD
         image: "https://placehold.co/600x200/40916c/ffffff?text=Christmas+Day"
     },
     {
@@ -53,6 +60,7 @@ const upcomingHolidays = [
         description: "A United States federal holiday celebrating the start of the Gregorian calendar year.",
         type: "National",
         scope: "Public",
+        ageEligibility: "All Ages", // ADDED FIELD
         image: "https://placehold.co/600x200/5a189a/ffffff?text=New+Years+Day"
     },
     {
@@ -61,6 +69,7 @@ const upcomingHolidays = [
         description: "A day to celebrate all forms of connection and communication across cultures. Public festivals and private retreats available.",
         type: "World Wide",
         scope: "Public",
+        ageEligibility: "All Ages", // ADDED FIELD
         image: "https://placehold.co/600x200/2a9d8f/ffffff?text=Contact+Anniversary"
     },
     {
@@ -69,6 +78,7 @@ const upcomingHolidays = [
         description: "A United States federal holiday marking the birthday of Martin Luther King Jr.",
         type: "National",
         scope: "Public",
+        ageEligibility: "All Ages", // ADDED FIELD
         image: "https://placehold.co/600x200/0077b6/ffffff?text=MLK+Day"
     },
     {
@@ -77,6 +87,7 @@ const upcomingHolidays = [
         description: "A United States federal holiday celebrating George Washington and Abraham Lincoln, often called Presidents' Day.",
         type: "National",
         scope: "Public",
+        ageEligibility: "All Ages", // ADDED FIELD
         image: "https://placehold.co/600x200/03045e/ffffff?text=Presidents+Day"
     },
     {
@@ -85,6 +96,7 @@ const upcomingHolidays = [
         description: "A simple, private 24-hour holiday for a single corporate client focused on reorganizing workflows and strategic planning.",
         type: "Group",
         scope: "Private",
+        ageEligibility: "18+", // ADDED FIELD
         image: "https://placehold.co/600x200/f2cc8f/ffffff?text=Equinox+Reset"
     },
     {
@@ -93,6 +105,7 @@ const upcomingHolidays = [
         description: "A day dedicated to promoting physical and mental well-being, featuring free meditation retreats and outdoor activities.",
         type: "World Wide",
         scope: "Public",
+        ageEligibility: "All Ages", // ADDED FIELD
         image: "https://placehold.co/600x200/4c9568/ffffff?text=Health+Wellness"
     },
     {
@@ -101,6 +114,7 @@ const upcomingHolidays = [
         description: "A United States federal holiday honoring the men and women who died while serving in the U.S. military.",
         type: "National",
         scope: "Public",
+        ageEligibility: "All Ages", // ADDED FIELD
         image: "https://placehold.co/600x200/a41623/ffffff?text=Memorial+Day"
     },
     {
@@ -109,6 +123,7 @@ const upcomingHolidays = [
         description: "A United States federal holiday commemorating the emancipation of enslaved African Americans.",
         type: "National",
         scope: "Public",
+        ageEligibility: "All Ages", // ADDED FIELD
         image: "https://placehold.co/600x200/3a0ca3/ffffff?text=Juneteenth"
     },
     {
@@ -117,6 +132,7 @@ const upcomingHolidays = [
         description: "A United States federal holiday commemorating the Declaration of Independence.",
         type: "National",
         scope: "Public",
+        ageEligibility: "All Ages", // ADDED FIELD
         image: "https://placehold.co/600x200/00b4d8/ffffff?text=Independence+Day"
     },
     {
@@ -125,6 +141,7 @@ const upcomingHolidays = [
         description: "A United States federal holiday celebrating the contributions of American workers.",
         type: "National",
         scope: "Public",
+        ageEligibility: "All Ages", // ADDED FIELD
         image: "https://placehold.co/600x200/007f5f/ffffff?text=Labor+Day"
     },
     {
@@ -133,6 +150,7 @@ const upcomingHolidays = [
         description: "A United States federal holiday commemorating the arrival of Christopher Columbus in the Americas.",
         type: "National",
         scope: "Public",
+        ageEligibility: "All Ages", // ADDED FIELD
         image: "https://placehold.co/600x200/f77f00/ffffff?text=Columbus+Day"
     }
 ];
@@ -252,6 +270,7 @@ function handleNewsInfoPage() {
             <h3>${nextHoliday.name}</h3>
             <p><strong>Date:</strong> ${formatDate(nextHoliday.date)}</p>
             <p><strong>Scope:</strong> ${nextHoliday.scope} / ${nextHoliday.type}</p>
+            <p><strong>Ages:</strong> ${nextHoliday.ageEligibility}</p>
             <p>${nextHoliday.description}</p>
         `;
     } else {
@@ -273,6 +292,7 @@ function handleNewsInfoPage() {
                     <strong>${formatDate(holiday.date)}:</strong>
                     ${holiday.name}
                     (<span style="color: ${holiday.scope === 'Public' ? '#ff6600' : '#004d99'}; font-weight: bold;">${holiday.scope}</span>) 
+                    <br><strong>Ages:</strong> ${holiday.ageEligibility}
                     <br>${holiday.description}
                 </div>
             </div>
@@ -302,6 +322,33 @@ window.toggleCompensationAmount = function(show) {
     updateTotalAmount();
 };
 
+/**
+ * Saves a holiday submission to the public list in localStorage if its scope is 'World Wide'.
+ * @param {object} holidayDetails - The details of the created holiday.
+ */
+function savePublicHoliday(holidayDetails) {
+    if (holidayDetails.scope !== 'World Wide') {
+        return; // Only save public holidays
+    }
+
+    try {
+        const publicDataString = localStorage.getItem('publicHolidays');
+        let publicHolidays = [];
+
+        if (publicDataString) {
+            publicHolidays = JSON.parse(publicDataString);
+        }
+
+        // Add the new public holiday
+        publicHolidays.push(holidayDetails);
+
+        // Save the updated list back to localStorage
+        localStorage.setItem('publicHolidays', JSON.stringify(publicHolidays));
+    } catch (e) {
+        console.error("Failed to save public holiday data to localStorage:", e);
+    }
+}
+
 
 /**
  * Logic for Rent.html
@@ -329,8 +376,10 @@ function handleRentalPage() {
             const startDate = document.getElementById('startDate').value;
             const endDate = document.getElementById('endDate').value;
             const paidCompensation = document.querySelector('input[name="paidCompensation"]:checked').value;
-            const compensationAmount = document.getElementById('compensationAmount').value;
+            const compensationAmountSelect = document.getElementById('compensationAmount');
+            const compensationAmount = compensationAmountSelect.value;
             const finalTotalText = document.getElementById('final-total').textContent; 
+            const ageEligibility = document.getElementById('ageEligibility').value; // CAPTURE NEW FIELD
 
             if (new Date(startDate) > new Date(endDate)) {
                 submissionMessage.textContent = 'Error: The Holiday Start Date cannot be after the End Date.';
@@ -348,15 +397,22 @@ function handleRentalPage() {
             
             // --- Success Path: Collect, Store, and Display ---
             const formData = new FormData(rentalForm);
+            
+            // Get text value for budget tier and compensation for better display
+            const budgetTierText = document.getElementById('budget').options[document.getElementById('budget').selectedIndex].text;
+            const compensationAmountText = paidCompensation === 'Yes' ? compensationAmountSelect.options[compensationAmountSelect.selectedIndex].text : 'None';
+            const ageEligibilityText = document.getElementById('ageEligibility').options[document.getElementById('ageEligibility').selectedIndex].text; // CAPTURE NEW FIELD TEXT
+
             const holidayDetails = {
                 theme: formData.get('theme'),
                 startDate: startDate,
                 endDate: endDate,
                 scope: formData.get('scope'),
+                ageEligibility: ageEligibilityText, // SAVE NEW FIELD
                 recurrence: formData.get('recurrence'),
-                budgetTier: document.getElementById('budget').options[document.getElementById('budget').selectedIndex].text,
+                budgetTier: budgetTierText,
                 paidCompensation: paidCompensation,
-                compensationAmount: paidCompensation === 'Yes' ? document.getElementById('compensationAmount').options[document.getElementById('compensationAmount').selectedIndex].text : 'None',
+                compensationAmount: compensationAmountText,
                 paymentOption: formData.get('paymentOption'),
                 fullName: formData.get('fullName'),
                 
@@ -366,8 +422,11 @@ function handleRentalPage() {
                 finalTotal: finalTotalText
             };
 
-            // Store the JSON data in localStorage
+            // 1. Store the JSON data as the user's last submission (private view)
             localStorage.setItem('createdHoliday', JSON.stringify(holidayDetails));
+
+            // 2. Save to public list if scope is 'World Wide'
+            savePublicHoliday(holidayDetails);
 
             // Display a success message and the button
             submissionMessage.innerHTML = `
@@ -375,10 +434,11 @@ function handleRentalPage() {
                 <p>We've received your custom holiday concept, "<strong>${holidayDetails.theme}</strong>."</p>
                 <div style="margin-top: 10px; padding: 10px; border: 1px dashed #ccc; border-radius: 4px; background-color: #f9f9f9;">
                     <strong>Estimated Total: ${holidayDetails.finalTotal}</strong><br>
-                    <strong>Start Date:</strong> ${formatDate(holidayDetails.startDate)}
+                    <strong>Start Date:</strong> ${formatDate(holidayDetails.startDate)}<br>
+                    <strong>Target Ages:</strong> ${holidayDetails.ageEligibility}
                 </div>
                 <button type="button" class="cta-button" onclick="window.location.href='newholiday.html'" style="margin-top: 20px;">
-                    View Your Holiday Details
+                    View All Holiday Concepts
                 </button>
             `;
             submissionMessage.className = 'message-box success-box';
@@ -391,6 +451,42 @@ function handleRentalPage() {
 
 
 // --- Main Execution Block ---
+
+// Mock Public Data Initialization (for fresh run testing)
+(function initMockPublicHolidays() {
+    if (!localStorage.getItem('publicHolidays')) {
+        const mockHolidays = [
+            {
+                theme: "Global Kindness Week",
+                startDate: "2026-03-15",
+                endDate: "2026-03-22",
+                scope: "World Wide",
+                ageEligibility: "All Ages", // ADDED FIELD
+                recurrence: "Annually / Yearly",
+                budgetTier: "$50,000 | The Global Chronomancer",
+                paidCompensation: "Yes",
+                compensationAmount: "$50.00 - Enhanced Stipend",
+                fullName: "Jane Doe",
+                finalTotal: "$55,000.00"
+            },
+             {
+                theme: "Planetary Silence Day",
+                startDate: "2026-04-01",
+                endDate: "2026-04-01",
+                scope: "World Wide",
+                ageEligibility: "18+", // ADDED FIELD
+                recurrence: "One Time Event (No Repeat)",
+                budgetTier: "$10,000 | The Local Explorer",
+                paidCompensation: "No",
+                compensationAmount: "None",
+                fullName: "Alice Smith",
+                finalTotal: "$10,000.00"
+            }
+        ];
+        localStorage.setItem('publicHolidays', JSON.stringify(mockHolidays));
+    }
+})();
+
 
 document.addEventListener('DOMContentLoaded', () => {
     // Check which page is loaded and run the corresponding script
